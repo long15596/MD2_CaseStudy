@@ -51,6 +51,7 @@ public class UserMenu {
                             System.out.println("| 3. Thanh toán                     |");
                             System.out.println("| 0. Thoát                          |");
                             System.out.println("└———————————————————————————————————┘");
+                            System.out.println("Chú em còn: " + c.getMoney() + " trong ví");
                             System.out.print("Thích gì chọn đi: ");
                             choice = Exception.choiceException();
                             switch (choice){
@@ -59,11 +60,16 @@ public class UserMenu {
                                     productManager.showAll();
                                     System.out.print("Chọn đồ gì: ");
                                     int productId = Exception.choiceException();
-                                    System.out.print("Nhập số lượng: ");
-                                    int byQuantity = Exception.choiceException();
                                     Product product = productManager.findById(productId);
-                                    com.setPayment(product.getPrice() * byQuantity);
-                                    System.out.println("OK bấy bề ship luôn");
+                                    System.out.print("Nhập số lượng: ");
+                                    int buyQuantity = Exception.choiceException();
+                                    if (product.getQuantity() > buyQuantity) {
+                                        com.setPayment(product.getPrice() * buyQuantity);
+                                        product.setQuantity(product.getQuantity() - buyQuantity);
+                                        System.out.println("OK bấy bề ship luôn");
+                                    } else {
+                                        System.out.println("Mua đ lắm thế");
+                                    }
                                 }
                                 case 2 -> chatSocket.client();
                                 case 3 -> {
@@ -76,7 +82,6 @@ public class UserMenu {
                                         System.out.println("Tài khoản đ đủ tiền rồi cháu ơi nạp thêm tiền đi");
                                         double money = inputNum.nextDouble();
                                         c.setMoney(money);
-                                        customerManager.writeData(customerManager.getCustomerList());
                                         System.out.println("Nạp thành công");
                                     } else {
                                         com.setPayment(totalPayment);
@@ -85,9 +90,8 @@ public class UserMenu {
                                         Invoice invoice = new Invoice(com, totalPayment, endTime);
                                         invoiceManager.add(invoice);
                                         System.out.println(invoice);
+                                        mainMenu();
                                     }
-                                    c.setMoney(0);
-//                                    mainMenu();
                                 }
                             }
                         }while (choice != 0);

@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class ChatSocket {
     public void server() {
         int portNum = 12345;
-        boolean running = true;
+        boolean check = true;
         try(ServerSocket serverSocket = new ServerSocket(portNum)) {
             System.out.println("Luôn luôn lắng nghe lâu lâu mới hiểu");
-            while (true){
+            while (check){
                 try(Socket clientSocket = serverSocket.accept();
                 InputStream input = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream()) {
@@ -27,12 +27,11 @@ public class ChatSocket {
                         }
                     }).start();
                     Scanner consoleScanner = new Scanner(System.in);
-                    while (running) {
+                    while (check) {
                         String serverMess = consoleScanner.nextLine();
                         output.write((serverMess + "\n").getBytes());
                         if (serverMess.equals("exit")) {
-                            running = false;
-                            serverSocket.close();
+                            check = false;
                         }
                     }
                 }

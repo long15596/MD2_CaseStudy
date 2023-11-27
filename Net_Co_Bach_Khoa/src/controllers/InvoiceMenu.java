@@ -14,7 +14,6 @@ public class InvoiceMenu {
     Scanner inputNum = new Scanner(System.in);
     InvoiceManager invoiceManager = new InvoiceManager();
     ComManager comManager = new ComManager();
-    CustomerManager customerManager = new CustomerManager();
     public void mainMenu(){
 
         int choice;

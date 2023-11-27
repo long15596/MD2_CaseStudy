@@ -1,3 +1,6 @@
+import controllers.AdminMenu;
+import controllers.UserMenu;
+
 public class Main {
 //    static Scanner sc = new Scanner(System.in);
 //    static double money = sc.nextDouble();
@@ -59,5 +62,9 @@ public class Main {
 //        }
 //    }
     public static void main(String[] args) {
+        AdminMenu adminMenu = new AdminMenu();
+        UserMenu userMenu = new UserMenu();
+        adminMenu.mainMenu();
+        userMenu.mainMenu();
     }
 }

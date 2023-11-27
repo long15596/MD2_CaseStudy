@@ -9,17 +9,6 @@ import java.util.Scanner;
 
 public class AdminMenu {
     Scanner input = new Scanner(System.in);
-    private final String username = "admin";
-    private final String password = "admin";
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void mainMenu() {
         ChatSocket chatSocket = new ChatSocket();
         ComManager comManager = new ComManager();
