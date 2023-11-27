@@ -11,7 +11,6 @@ public class ProductManager implements GeneralManager<Product>{
     Scanner inputNum = new Scanner(System.in);
     Scanner inputStr = new Scanner(System.in);
     List<Product> products;
-    private static int idIncrement = 1;
 
     public ProductManager() {
         this.products = readData();
@@ -19,8 +18,6 @@ public class ProductManager implements GeneralManager<Product>{
 
     @Override
     public void add(Product o) {
-        o.setId(idIncrement);
-        idIncrement++;
         products.add(o);
         writeData(products);
     }
@@ -47,7 +44,6 @@ public class ProductManager implements GeneralManager<Product>{
         }
         writeData(products);
     }
-
     @Override
     public void update(int id) {
         System.out.println("Nhập Id dịch vụ: ");
@@ -122,13 +118,13 @@ public class ProductManager implements GeneralManager<Product>{
             String content = bufferedReader.readLine();
             while ((content = bufferedReader.readLine()) != null) {
                 String[] value = content.split(", ");
+                int id = Integer.parseInt(value[0]);
                 String name = value[1];
                 double price = Double.parseDouble(value[2]);
                 int quantity = Integer.parseInt(value[3]);
                 Product product = new Product(name, price, quantity);
+                product.setId(id);
                 productList.add(product);
-                product.setId(idIncrement);
-                idIncrement++;
             }
             bufferedReader.close();
         } catch (IOException e) {

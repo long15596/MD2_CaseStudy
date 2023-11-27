@@ -3,8 +3,9 @@ package models;
 public class Com {
     private int id;
     private String name;
-    private final double price = 5000;
+    private double price = 5000;
     private double payment;
+    private static int idIncrement = 1;
     public double getPayment() {
         return payment;
     }
@@ -15,6 +16,8 @@ public class Com {
 
     private Customer customer;
     public Com(String name) {
+        this.id = idIncrement;
+        idIncrement++;
         this.name = name;
         this.customer = null;
     }
@@ -49,6 +52,6 @@ public class Com {
     public String toString() {
         return "PC ID: " + id + '\n' +
                 "Tên máy: " + name + '\n' +
-                "Khách đang dùng: \n" + customer;
+                "Khách đang dùng: " + customer + '\n';
     }
 }

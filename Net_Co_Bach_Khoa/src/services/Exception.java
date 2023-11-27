@@ -1,5 +1,6 @@
 package services;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Exception {
@@ -13,7 +14,7 @@ public class Exception {
                    choice = -1;
                    System.out.println("Nhập số phải lớn hơn không chứ");
                }
-           } catch (NumberFormatException exception) {
+           } catch (InputMismatchException exception) {
                System.out.println("Nhập số nhé bạn ơi");
            }
        } while (choice == -1);

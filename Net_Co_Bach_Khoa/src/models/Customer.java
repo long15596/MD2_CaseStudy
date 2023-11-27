@@ -6,7 +6,10 @@ public class Customer {
     private String username;
     private String password;
     private double money;
+    private static int idIncrement = 1;
     public Customer(String name, String username, String password, double money) {
+        this.id = idIncrement;
+        idIncrement++;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -55,8 +58,8 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Khách ID:" + id + '\n' +
+        return "Khách ID:" + getId() + '\n' +
                 "Tên: " + name + '\n' +
-                "Tiền trong tài khoản: " + money;
+                "Tiền trong tài khoản: " + money + '\n';
     }
 }

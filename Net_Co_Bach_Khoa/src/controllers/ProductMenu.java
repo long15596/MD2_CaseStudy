@@ -35,7 +35,9 @@ public class ProductMenu {
                         double price = inputNum.nextDouble();
                         System.out.println("Nhập số lượng");
                         int quantity = inputNum.nextInt();
-                        productManager.add(new Product(name, price, quantity));
+                        Product product = new Product(name, price, quantity);
+                        productManager.add(product);
+                        System.out.println(product);
                         System.out.println("Thêm thành công");
                     }
                     case 3 -> {

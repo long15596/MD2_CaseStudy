@@ -11,7 +11,6 @@ public class CustomerManager implements GeneralManager<Customer>{
     Scanner inputNum = new Scanner(System.in);
     Scanner inputStr = new Scanner(System.in);
     List<Customer> customerList;
-    private static int idIncrement = 1;
 
     public CustomerManager() {
         this.customerList = readData();
@@ -27,8 +26,6 @@ public class CustomerManager implements GeneralManager<Customer>{
 
     @Override
     public void add(Customer o) {
-        o.setId(idIncrement);
-        idIncrement++;
         customerList.add(o);
         writeData(customerList);
     }
@@ -55,7 +52,12 @@ public class CustomerManager implements GeneralManager<Customer>{
         }
         writeData(customerList);
     }
-
+    public Customer findByName(String name){
+        for (Customer c: customerList){
+            if (c.getName().contains(name)) return c;
+        }
+        return null;
+    }
     @Override
     public void update(int id) {
         System.out.print("Nhập ID khách hàng: ");
@@ -110,7 +112,7 @@ public class CustomerManager implements GeneralManager<Customer>{
     public void writeData(List<Customer> customerList) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("D:\\CodeGym\\MD2\\MD2_CaseStudy\\Net_Co_Bach_Khoa\\src\\data\\customerData.csv"));
-            String line = "ID, Tên, Username, Password, Money\n";
+            String line = "ID, Tên, Username, Password, Tiền\n";
             for (Customer c: customerList) {
                 line += c.getId() + ", "
                         + c.getName() + ", "
@@ -127,19 +129,21 @@ public class CustomerManager implements GeneralManager<Customer>{
     public List<Customer> readData() {
         List<Customer> customers = new ArrayList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("D:\\CodeGym\\MD2\\MD2_CaseStudy\\Net_Co_Bach_Khoa\\src\\data\\customerData.csv"));
+            FileReader fileReader = new FileReader("D:\\CodeGym\\MD2\\MD2_CaseStudy\\Net_Co_Bach_Khoa\\src\\data\\customerData.csv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
             String content = bufferedReader.readLine();
             while ((content = bufferedReader.readLine()) != null) {
                 String[] value = content.split(", ");
+                int id = Integer.parseInt(value[0]);
                 String name = value[1];
                 String username = value[2];
                 String password = value[3];
                 double money = Double.parseDouble(value[4]);
                 Customer customer = new Customer(name, username, password, money);
+                customer.setId(id);
                 customers.add(customer);
-                customer.setId(idIncrement);
-                idIncrement++;
             }
+            fileReader.close();
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());

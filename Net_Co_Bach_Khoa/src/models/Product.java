@@ -5,8 +5,11 @@ public class Product {
     private String name;
     private double price;
     private int quantity;
+    private static int idIncrement = 1;
 
     public Product(String name, double price, int quantity) {
+        this.id = idIncrement;
+        idIncrement++;
         this.name = name;
         this.price = price;
         this.quantity = quantity;

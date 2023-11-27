@@ -19,8 +19,6 @@ public class ComManager implements GeneralManager<Com>{
 
     @Override
     public void add(Com o) {
-        o.setId(idIncrement);
-        idIncrement++;
         comList.add(o);
         writeData(comList);
     }
@@ -47,7 +45,12 @@ public class ComManager implements GeneralManager<Com>{
         }
         writeData(comList);
     }
-
+    public Com findByName(String name) {
+        for (Com c: comList){
+            if (c.getName().contains(name)) return c;
+        }
+        return null;
+    }
     @Override
     public void update(int id) {
         System.out.println("Nhập ID máy: ");
@@ -64,8 +67,6 @@ public class ComManager implements GeneralManager<Com>{
         }
         writeData(comList);
     }
-    public void turnOnCom(){}
-    public void cashRegister(){}
     public void writeData(List<Com> comList) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("D:\\CodeGym\\MD2\\MD2_CaseStudy\\Net_Co_Bach_Khoa\\src\\data\\comData.csv"));
@@ -88,11 +89,11 @@ public class ComManager implements GeneralManager<Com>{
             String content = bufferedReader.readLine();
             while ((content = bufferedReader.readLine()) != null) {
                 String[] value = content.split(", ");
+                int id = Integer.parseInt(value[0]);
                 String name = value[1];
                 Com com = new Com(name);
+                com.setId(id);
                 coms.add(com);
-                com.setId(idIncrement);
-                idIncrement++;
             }
             bufferedReader.close();
         } catch (IOException e) {

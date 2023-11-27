@@ -1,2 +1,3 @@
-ID, Tên, Username, Password, Money
-1, long, long, 123, 100000.0
+ID, Tên, Username, Password, Tiền
+1, long, long, 123, 20000.0
+2, kiên, kien, 123, 50000.0

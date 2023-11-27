@@ -20,7 +20,7 @@ public class CustomerMenu {
             System.out.println("| 1. Hiển thị danh sách             |");
             System.out.println("| 2. Thêm tài khoản mới             |");
             System.out.println("| 3. Sửa đổi thông tin              |");
-            System.out.println("| 4. Xóa máy khỏi danh sách         |");
+            System.out.println("| 4. Xóa khỏi danh sách             |");
             System.out.println("| 0. Thoát                          |");
             System.out.println("└———————————————————————————————————┘");
             System.out.print("Chọn đi từ 1 đến 4 thôi: ");
@@ -38,7 +38,9 @@ public class CustomerMenu {
                         String password = inputStr.nextLine();
                         System.out.println("Nạp tiền nào:");
                         double money = inputNum.nextDouble();
-                        customerManager.add(new Customer(name, username, password, money));
+                        Customer customer = new Customer(name, username, password, money);
+                        customerManager.add(customer);
+                        System.out.println(customer);
                         System.out.println("Tạo thành công");
                     }
                     case 3 -> {
